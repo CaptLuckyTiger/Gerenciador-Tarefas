@@ -28,7 +28,7 @@
                             <?= csrf_field() ?>
                             <div class="mb-3">
                                 <label for="title" class="form-label">Título</label>
-                                <input type="text" class="form-control" id="title" name="title" value="<?= old('title') ?>" required>
+                                <input type="text" class="form-control" id="title" name="title" value="<?= esc(old('title')) ?>" required>
                             </div>
 
                             <div class="mb-3">

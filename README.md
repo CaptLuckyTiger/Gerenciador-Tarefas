@@ -6,7 +6,7 @@ O projeto possui uma interface web para criação, edição, consulta e exclusã
 
 ## Tecnologias
 
-* PHP 8.1+
+* PHP 8.2+
 * CodeIgniter 4
 * PostgreSQL
 * Bootstrap 5
@@ -16,7 +16,7 @@ O projeto possui uma interface web para criação, edição, consulta e exclusã
 
 Para executar o projeto localmente, é necessário ter instalado:
 
-* PHP 8.1 ou superior
+* PHP 8.2 ou superior
 * Composer
 * PostgreSQL
 

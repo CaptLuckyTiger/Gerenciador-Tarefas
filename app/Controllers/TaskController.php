@@ -53,14 +53,17 @@ class TaskController extends Controller
     {
         $model = new TaskModel();
 
+        if (!$model->find($id)) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Tarefa não encontrada: $id");
+        }
+
         $data = [
-            'id'          => $id,
             'title'       => $this->request->getPost('title'),
             'description' => $this->request->getPost('description'),
             'status'      => $this->request->getPost('status'),
         ];
 
-        if (!$model->save($data)) {
+        if (!$model->update($id, $data)) {
             return redirect()->back()->withInput()->with('errors', $model->errors());
         }
 
@@ -71,11 +74,14 @@ class TaskController extends Controller
     {
         $model = new TaskModel();
 
-        if ($model->find($id)) {
-            $model->delete($id);
-            return redirect()->to('/tasks')->with('success', 'Tarefa excluída com sucesso!');
+        if (!$model->find($id)) {
+            return redirect()->to('/tasks')->with('error', 'Tarefa não encontrada.');
         }
 
-        return redirect()->to('/tasks')->with('error', 'Tarefa não encontrada.');
+        if (!$model->delete($id)) {
+            return redirect()->to('/tasks')->with('error', 'Não foi possível excluir a tarefa.');
+        }
+
+        return redirect()->to('/tasks')->with('success', 'Tarefa excluída com sucesso!');
     }
 }

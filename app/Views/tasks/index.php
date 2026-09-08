@@ -19,10 +19,10 @@
         </div>
 
         <?php if (session()->getFlashdata('success')): ?>
-            <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+            <div class="alert alert-success"><?= esc(session()->getFlashdata('success')) ?></div>
         <?php endif; ?>
         <?php if (session()->getFlashdata('error')): ?>
-            <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+            <div class="alert alert-danger"><?= esc(session()->getFlashdata('error')) ?></div>
         <?php endif; ?>
 
         <div class="card shadow-sm">
@@ -57,7 +57,10 @@
                                         </td>
                                         <td class="text-end">
                                             <a href="<?= base_url('tasks/edit/' . $task['id']) ?>" class="btn btn-sm btn-outline-primary">Editar</a>
-                                            <a href="<?= base_url('tasks/delete/' . $task['id']) ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Excluir</a>
+                                            <form action="<?= base_url('tasks/delete/' . $task['id']) ?>" method="post" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir esta tarefa?')">
+                                                <?= csrf_field() ?>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
